@@ -13,14 +13,14 @@ void gotTouch8() {touch[7] = true;}
 void setup() {
   Serial.begin(115200);
   Serial.println("ESP32 Touch Matrix");
-  touchAttachInterrupt(T4, gotTouch1, threshold);
-  touchAttachInterrupt(T7, gotTouch2, threshold);
-  touchAttachInterrupt(T8, gotTouch3, threshold);
-  touchAttachInterrupt(T0, gotTouch4, threshold);
-  touchAttachInterrupt(T9, gotTouch5, threshold);
-  touchAttachInterrupt(T6, gotTouch6, threshold);
-  touchAttachInterrupt(T5, gotTouch7, threshold);
-  touchAttachInterrupt(T3, gotTouch8, threshold);
+  touchAttachInterrupt(T4, gotTouch1, threshold);   //Row 1
+  touchAttachInterrupt(T7, gotTouch2, threshold);   //Row 2
+  touchAttachInterrupt(T8, gotTouch3, threshold);   //Row 3
+  touchAttachInterrupt(T0, gotTouch4, threshold);   //Row 4
+  touchAttachInterrupt(T9, gotTouch5, threshold);   //column 1
+  touchAttachInterrupt(T6, gotTouch6, threshold);   //column 2
+  touchAttachInterrupt(T5, gotTouch7, threshold);   //column 3
+  touchAttachInterrupt(T3, gotTouch8, threshold);   //column 4
 }
 
 void loop() {
