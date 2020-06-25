@@ -1,10 +1,4 @@
-#include <FastLED.h>
-
-#define NUM_LEDS 9
-#define DATA_PIN 16
-CRGB leds[NUM_LEDS];
-
-int threshold = 40;
+int threshold = 40;   //touch sensitivity
 
 bool touch1detected = false;
 bool touch2detected = false;
@@ -47,63 +41,58 @@ void gotTouch9() {
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("ESP32 Touch Interrupt");
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-  LEDS.setBrightness(100);
-  touchAttachInterrupt(T3, gotTouch1, threshold);
-  touchAttachInterrupt(T2, gotTouch2, threshold);
-  touchAttachInterrupt(T0, gotTouch3, threshold);
-  touchAttachInterrupt(T9, gotTouch4, threshold);
-  touchAttachInterrupt(T6, gotTouch5, threshold);
-  touchAttachInterrupt(T5, gotTouch6, threshold);
-  touchAttachInterrupt(T4, gotTouch7, threshold);
-  touchAttachInterrupt(T7, gotTouch8, threshold);
-  touchAttachInterrupt(T8, gotTouch9, threshold);
+  Serial.println("ESP32 Touch Interrupts");
+  touchAttachInterrupt(T3, gotTouch1, threshold);   //GPIO15
+  touchAttachInterrupt(T2, gotTouch2, threshold);   //GPIO2
+  touchAttachInterrupt(T0, gotTouch3, threshold);   //GPIO4
+  touchAttachInterrupt(T9, gotTouch4, threshold);   //GPIO33
+  touchAttachInterrupt(T6, gotTouch5, threshold);   //GPIO14
+  touchAttachInterrupt(T5, gotTouch6, threshold);   //GPIO12
+  touchAttachInterrupt(T4, gotTouch7, threshold);   //GPIO13
+  touchAttachInterrupt(T7, gotTouch8, threshold);   //GPIO27
+  touchAttachInterrupt(T8, gotTouch9, threshold);   //GPIO32
 }
 
 void loop() {
   if (touch1detected) {
     touch1detected = false;
-    touch_light(0);
+    touch_active(0);
   }
   if (touch2detected) {
     touch2detected = false;
-    touch_light(1);
+    touch_active(1);
   }
   if (touch3detected) {
     touch3detected = false;
-    touch_light(2);
+    touch_active(2);
   }
   if (touch4detected) {
     touch4detected = false;
-    touch_light(3);
+    touch_active(3);
   }
   if (touch5detected) {
     touch5detected = false;
-    touch_light(4);
+    touch_active(4);
   }
   if (touch6detected) {
     touch6detected = false;
-    touch_light(5);
+    touch_active(5);
   }
   if (touch7detected) {
     touch7detected = false;
-    touch_light(6);
+    touch_active(6);
   }
   if (touch8detected) {
     touch8detected = false;
-    touch_light(7);
+    touch_active(7);
   }
   if (touch9detected) {
     touch9detected = false;
-    touch_light(8);
+    touch_active(8);
   }
 }
 
-void touch_light(int num){
-  static uint8_t hue = 0;
-    leds[num] = CHSV(hue++, 255, 255);
-    FastLED.show();
-    leds[num].nscale8(250);
-    delay(10);
+void touch_active(int touchpad){
+  Serial.println(touchpad);
+  // put your code here, to run while touchpads detect anything;
 }
